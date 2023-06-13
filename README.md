@@ -18,4 +18,6 @@ How to build the program by x64
 7. And then you can see the excutable file in x64 directory of solution folder.
    ![image](https://github.com/jenisdev/chatgptapi-windowsConsole/assets/134540953/586d8f02-f757-4947-8e6c-3b806f586279)
    ![image](https://github.com/jenisdev/chatgptapi-windowsConsole/assets/134540953/67c96cf5-7829-46bf-969b-290f573c405e)
-8. All done!
+8. Finally, in order to use ChatGPT4 API, all is up to you.
+   I recommend this article https://www.videogamer.com/tech/ai/how-to-access-gpt-4/
+9. All done!
