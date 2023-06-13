@@ -1,6 +1,7 @@
 # chatgptapi-windowsConsole
 
-How to build the program by x64
+# How to build the program by x64
+
 1. Select "Release" as a build option
   ![image](https://github.com/jenisdev/chatgptapi-windowsConsole/assets/134540953/ce3bdd23-ee13-4a0d-8284-749be6e43fdc)
   
