@@ -29,3 +29,10 @@
 8. Finally, in order to use ChatGPT4 API, all is up to you.
    I recommend this article https://www.videogamer.com/tech/ai/how-to-access-gpt-4/
 9. All done!
+
+>>>>> #Additional steps to prevent requiring runtime DLLs
+>>>>> ![image](https://github.com/jenisdev/chatgptapi-windowsConsole/assets/134540953/601711ca-b116-4067-a545-d3f8e51ba7ad)
+>>>>> ![image](https://github.com/jenisdev/chatgptapi-windowsConsole/assets/134540953/d839909c-043e-4b43-be5e-e7ec356e2b8a)
+>>>>> ![image](https://github.com/jenisdev/chatgptapi-windowsConsole/assets/134540953/51655877-410e-498f-b6f3-c7a8e9f91556)
+
+
