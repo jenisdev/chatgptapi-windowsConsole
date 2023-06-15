@@ -5,7 +5,7 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	WSADATA w = {};
 	WSAStartup(MAKEWORD(2, 2), &w);
-	CHATGPT_API c("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");
+	CHATGPT_API c("Your KEY");
 	c.SetModel("gpt-3.5-turbo");
 	for (;;)
 	{
