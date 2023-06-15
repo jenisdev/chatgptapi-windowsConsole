@@ -5,8 +5,8 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	WSADATA w = {};
 	WSAStartup(MAKEWORD(2, 2), &w);
-	CHATGPT_API c("your-api-key");
-	c.SetModel("text-ada-001");
+	CHATGPT_API c("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");
+	c.SetModel("gpt-3.5-turbo");
 	for (;;)
 	{
 		std::string input;
