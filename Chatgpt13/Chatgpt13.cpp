@@ -6,7 +6,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	WSADATA w = {};
 	WSAStartup(MAKEWORD(2, 2), &w);
 
-	CHATGPT_API ChatGPT_OBJ("your-key");
+	CHATGPT_API ChatGPT_OBJ("yourkey");
 	ChatGPT_OBJ.SetModel("gpt-3.5-turbo");
 
 	for (;;)

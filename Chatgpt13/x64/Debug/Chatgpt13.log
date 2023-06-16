@@ -1,0 +1,16 @@
+﻿Build started 6/16/2023 4:19:20 AM.
+     1>Project "D:\Work\Clang\ChatGPT13(winNT-build2013)\Chatgpt13\Chatgpt13\Chatgpt13.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I"C:\Program Files\Boost\boost_1_82_0" /Zi /nologo /W3 /WX- /sdl /Od /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"x64\Debug\Chatgpt13.pch" /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I"C:\Program Files\Boost\boost_1_82_0" /Zi /nologo /W3 /WX- /sdl /Od /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"x64\Debug\Chatgpt13.pch" /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt Chatgpt13.cpp
+         Chatgpt13.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Work\Clang\ChatGPT13(winNT-build2013)\Chatgpt13\x64\Debug\Chatgpt13.exe" /INCREMENTAL /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /manifestinput:"C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\Include\Manifest\dpiaware.manifest" /DEBUG /PDB:"D:\Work\Clang\ChatGPT13(winNT-build2013)\Chatgpt13\x64\Debug\Chatgpt13.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Work\Clang\ChatGPT13(winNT-build2013)\Chatgpt13\x64\Debug\Chatgpt13.lib" /MACHINE:X64 x64\Debug\Chatgpt13.obj
+         x64\Debug\stdafx.obj
+         Chatgpt13.vcxproj -> D:\Work\Clang\ChatGPT13(winNT-build2013)\Chatgpt13\x64\Debug\Chatgpt13.exe
+     1>Done Building Project "D:\Work\Clang\ChatGPT13(winNT-build2013)\Chatgpt13\Chatgpt13\Chatgpt13.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.74

@@ -13,6 +13,9 @@
 #include "boost\optional.hpp"
 
 #define _BUFFERSIZE 10000
+#define REQ_BUFFSIZE 100010
+#define AUTH_BUFF 200
+#define MX_TOKENS 4096
 #define UNSIGLONG unsigned long
 #define STD_CHARVECTOR std::vector<char>
 #define STDSTR std::string
@@ -54,28 +57,28 @@ STD_CHARVECTOR Fetch(const char* TheLink)
 
 			for (;;)
 			{
-				DWORD n;
-				char Buff[100010] = { 0 };
-				memset(Buff, 0, 100010);
-				BOOL  F = InternetReadFile(hRequest, Buff, 100000, &n);
-				if (F == false)
+				DWORD nCNT;
+				char Buff[REQ_BUFFSIZE] = { 0 };
+				memset(Buff, 0, REQ_BUFFSIZE);
+				BOOL  isREAD = InternetReadFile(hRequest, Buff, REQ_BUFFSIZE, &nCNT);
+				if (isREAD == false)
 				{
 					ERR = 2;
 					break;
 				}
-				if (n == 0)
+				if (nCNT == 0)
 				{
 					// End of file !
 					ERR = 0;
 					break;
 				}
-				TotalTransferred += n;
+				TotalTransferred += nCNT;
 
 				//Write to File !
 				//char xx = Buff[n];
 				size_t olds = resp.size();
-				resp.resize(olds + n);
-				memcpy(resp.data() + olds, Buff, n);
+				resp.resize(olds + nCNT);
+				memcpy(resp.data() + olds, Buff, nCNT);
 
 				int NewPos = 0;
 				if (Size != -1)
@@ -106,12 +109,12 @@ class CHATGPT_API
 
 	std::wstring Bearer()
 	{
-		wchar_t auth[200] = {};
-		swprintf_s(auth, 200, L"Authorization: Bearer %S", APIKEY.c_str());
+		wchar_t auth[AUTH_BUFF] = {};
+		swprintf_s(auth, AUTH_BUFF, L"Authorization: Bearer %S", APIKEY.c_str());
 		return auth;
 	}
 
-	boost::optional<CHATGPT_RESULT> Text(const char* prompt, int Temperature = 0, int max_tokens = 4096)
+	boost::optional<CHATGPT_RESULT> Text(const char* prompt, int Temperature = 0, int max_tokens = MX_TOKENS)
 	{
 		STD_CHARVECTOR data(_BUFFERSIZE);
 		sprintf_s(data.data(), _BUFFERSIZE,
