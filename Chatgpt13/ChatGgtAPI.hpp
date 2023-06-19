@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include <WinInet.h>
 #include <vector>
-#include <iterator>
+#include <algorithm>
 #include <string>
 #include <sstream>
 #include <map>
