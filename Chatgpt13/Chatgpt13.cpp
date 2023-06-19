@@ -5,7 +5,7 @@ using namespace std;
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	CHATGPT_API ChatGPT_OBJ("your-key");
+	CHATGPT_API ChatGPT_OBJ("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");
 	ChatGPT_OBJ.SetModel("gpt-3.5-turbo");
 	LISTCONVERSATIONS hist_conver;
 	LISTSESSIONS list_session;
@@ -84,16 +84,22 @@ int _tmain(int argc, _TCHAR* argv[])
 		string request_part = "";
 		if (!isNewSession) {
 			for (int i = 0; i < hist_conver.size(); ++i) {
-				request_part += R"({"role":"user", "content":")" + hist_conver[i].question + R"("},)";
-				request_part += R"({"role":"assistant", "content":")" + hist_conver[i].answer + R"("},)";
+				string question = hist_conver[i].question;
+				string answer = hist_conver[i].answer;
+				replace(question.begin(), question.end(), '\"', '\'');
+				replace(answer.begin(), answer.end(), '\"', '\'');
+				replace(answer.begin(), answer.end(), '\n', ' ');
+				request_part += R"({"role":"user", "content":")" + question + R"("},)";
+				request_part += R"({"role":"assistant", "content":")" + answer + R"("},)";
 			}
+			replace(prompt.begin(), prompt.end(), '\"', '\'');
 			request_part += R"({"role":"user", "content":")" + prompt + R"("})";
 		}
 		else
 		{
 			request_part = R"("role": "user", "content":")" + prompt + R"("})";
 		}
-
+	
 		auto off = ChatGPT_OBJ.Text(request_part.c_str());
 		if (!off.has_value())
 			continue;
