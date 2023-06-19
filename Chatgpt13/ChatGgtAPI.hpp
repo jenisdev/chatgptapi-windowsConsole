@@ -1,7 +1,9 @@
 #include <iostream>
+#include <sstream>
 #include <Windows.h>
 #include <WinInet.h>
 #include <vector>
+#include <iterator>
 #include <string>
 #include <sstream>
 #include <map>
@@ -22,6 +24,14 @@
 #define JSONOBJECT jsonxx::Object
 #define JSONARRAY jsonxx::Array
 #define JSONSTRING jsonxx::String
+#define LISTCONVERSATIONS std::vector<ONE_CONVERSATION>
+#define LISTSESSIONS std::vector<LISTCONVERSATIONS>
+
+struct ONE_CONVERSATION
+{
+	STDSTR question;
+	STDSTR answer;
+};
 
 struct CHATGPT_RESULT
 {
@@ -152,6 +162,7 @@ class CHATGPT_API
 				auto& message = choice0.get<JSONOBJECT>("message");
 				r.t = message.get<JSONSTRING>("content");
 			}
+
 			return r;
 		}
 		catch (int Err)
