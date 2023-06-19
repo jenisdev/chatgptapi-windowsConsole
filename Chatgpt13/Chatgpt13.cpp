@@ -5,7 +5,7 @@ using namespace std;
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	CHATGPT_API ChatGPT_OBJ("your key");
+	CHATGPT_API ChatGPT_OBJ("your-key");
 	ChatGPT_OBJ.SetModel("gpt-3.5-turbo");
 	LISTCONVERSATIONS hist_conver;
 	LISTSESSIONS list_session;
@@ -88,15 +88,19 @@ int _tmain(int argc, _TCHAR* argv[])
 				string answer = hist_conver[i].answer;
 				replace(question.begin(), question.end(), '\"', '\'');
 				replace(answer.begin(), answer.end(), '\"', '\'');
+				replace(question.begin(), question.end(), '\n', ' ');
 				replace(answer.begin(), answer.end(), '\n', ' ');
 				request_part += R"({"role":"user", "content":")" + question + R"("},)";
 				request_part += R"({"role":"assistant", "content":")" + answer + R"("},)";
 			}
 			replace(prompt.begin(), prompt.end(), '\"', '\'');
+			replace(prompt.begin(), prompt.end(), '\n', ' ');
 			request_part += R"({"role":"user", "content":")" + prompt + R"("})";
 		}
 		else
 		{
+			replace(prompt.begin(), prompt.end(), '\"', '\'');
+			replace(prompt.begin(), prompt.end(), '\n', ' ');
 			request_part = R"("role": "user", "content":")" + prompt + R"("})";
 		}
 	
