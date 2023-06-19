@@ -128,11 +128,10 @@ class CHATGPT_API
 	{
 		STD_CHARVECTOR data(_BUFFERSIZE);
 		sprintf_s(data.data(), _BUFFERSIZE,
-			R"({"model": "%s", "messages": [{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "%s"}]})",
+			R"({"model": "%s", "messages": [{"role": "system", "content": "You are a helpful assistant."}, %s]})",
 			model.c_str(), prompt);
-
 		data.resize(strlen(data.data()));
-
+		
 		STDSTR str = data.data();
 
 		RESTAPI::REST hREST;
