@@ -5,11 +5,11 @@ using namespace std;
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	CHATGPT_API ChatGPT_OBJ("your_key");
+	CHATGPT_API ChatGPT_OBJ("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");
 	ChatGPT_OBJ.SetModel("gpt-3.5-turbo");
 	LISTCONVERSATIONS hist_conver;
 	LISTSESSIONS list_session;
-
+	bool isNewSession = false;
 	for (;;)
 	{
 		std::string prompt;
@@ -80,8 +80,21 @@ int _tmain(int argc, _TCHAR* argv[])
 			
 			break;
 		}
+		//{"role": "user", "content": "%s"}
+		string request_part = "";
+		if (!isNewSession) {
+			for (int i = 0; i < hist_conver.size(); ++i) {
+				request_part += R"({"role":"user", "content":")" + hist_conver[i].question + R"("},)";
+				request_part += R"({"role":"assistant", "content":")" + hist_conver[i].answer + R"("},)";
+			}
+			request_part += R"({"role":"user", "content":")" + prompt + R"("})";
+		}
+		else
+		{
+			request_part = R"("role": "user", "content":")" + prompt + R"("})";
+		}
 
-		auto off = ChatGPT_OBJ.Text(prompt.c_str());
+		auto off = ChatGPT_OBJ.Text(request_part.c_str());
 		if (!off.has_value())
 			continue;
 		auto& r = off.value();
