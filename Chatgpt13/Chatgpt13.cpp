@@ -5,7 +5,7 @@ using namespace std;
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	CHATGPT_API ChatGPT_OBJ("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");
+	CHATGPT_API ChatGPT_OBJ("your key");
 	ChatGPT_OBJ.SetModel("gpt-3.5-turbo");
 	LISTCONVERSATIONS hist_conver;
 	LISTSESSIONS list_session;
