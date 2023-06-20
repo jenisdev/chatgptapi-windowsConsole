@@ -1,7 +1,26 @@
 #include "stdafx.h"
 #include "ChatGgtAPI.hpp"
 
+
+
 using namespace std;
+
+std::string escape_json(const std::string &s) {
+	std::ostringstream o;
+	for (auto c = s.cbegin(); c != s.cend(); c++) {
+		switch (*c) {
+		case '\t': o << "\\t"; break;
+		case '"': o << "\\\""; break;
+		case '\\': o << "\\\\"; break;
+		case '\b': o << "\\b"; break;
+		case '\f': o << "\\f"; break;
+		case '\n': o << "\\n"; break;
+		case '\r': o << "\\r"; break;
+		default: o << *c;
+		}
+	}
+	return o.str();
+}
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -80,30 +99,26 @@ int _tmain(int argc, _TCHAR* argv[])
 			
 			break;
 		}
-		//{"role": "user", "content": "%s"}
+		
 		string request_part = "";
 		if (!isNewSession) {
 			for (int i = 0; i < hist_conver.size(); ++i) {
 				string question = hist_conver[i].question;
 				string answer = hist_conver[i].answer;
-				replace(question.begin(), question.end(), '\"', '\'');
-				replace(answer.begin(), answer.end(), '\"', '\'');
-				replace(question.begin(), question.end(), '\n', ' ');
-				replace(answer.begin(), answer.end(), '\n', ' ');
-				request_part += R"({"role":"user", "content":")" + question + R"("},)";
-				request_part += R"({"role":"assistant", "content":")" + answer + R"("},)";
+
+				request_part += R"({"role":"user", "content":")" + escape_json(question) + R"("},)";
+				request_part += R"({"role":"assistant", "content":")" + escape_json(answer) + R"("},)";
 			}
-			replace(prompt.begin(), prompt.end(), '\"', '\'');
-			replace(prompt.begin(), prompt.end(), '\n', ' ');
-			request_part += R"({"role":"user", "content":")" + prompt + R"("})";
+
+			
+			request_part += R"({"role":"user", "content":")" + escape_json(prompt) + R"("})";
 		}
 		else
 		{
-			replace(prompt.begin(), prompt.end(), '\"', '\'');
-			replace(prompt.begin(), prompt.end(), '\n', ' ');
-			request_part = R"("role": "user", "content":")" + prompt + R"("})";
+			
+			request_part = R"("role": "user", "content":")" + escape_json(prompt) + R"("})";
 		}
-	
+
 		auto off = ChatGPT_OBJ.Text(request_part.c_str());
 		if (!off.has_value())
 			continue;
