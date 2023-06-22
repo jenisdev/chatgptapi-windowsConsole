@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "ChatGgtAPI.hpp"
 
-
-
 using namespace std;
 
 std::string escape_json(const std::string &s) {
@@ -41,62 +39,72 @@ int _tmain(int argc, _TCHAR* argv[])
 			stringstream s(prompt);
 			string pref_session;
 			s >> pref_session;
+			// Restore the session
+			if (hist_conver.size() > 0) {
+				LISTCONVERSATIONS item_conv(hist_conver);
+				list_session.insert(list_session.end(), item_conv);
+				hist_conver.clear();
+			}
 
 			if ((s >> std::ws).eof()) {
 				cout << "Session " << list_session.size() + 1 << ":" << endl;
-				for (int i = 0; i < hist_conver.size(); ++i) {
-					cout << "Question: " << hist_conver[i].question << endl;
-					cout << "Answer: " << hist_conver[i].answer << endl;
+				session_num = (int)list_session.size();
+
+				for (int i = 0; i < list_session[session_num - 1].size(); ++i) {
+					cout << "Question: " << list_session[session_num - 1][i].question << endl;
+					cout << "Answer: " << list_session[session_num - 1][i].answer << endl;
 				}
 			}
 			else 
 			{
 				s >> session_num;
-				if (session_num > list_session.size()) {
-					cout << "The number is not valid. Here are current session's conversations." << endl;
-					cout << "Session " << list_session.size() + 1 << ":" << endl;
-					for (int i = 0; i < hist_conver.size(); ++i) {
-						cout << "Question: " << hist_conver[i].question << endl;
-						cout << "Answer: " << hist_conver[i].answer << endl;
-					}
+				if (session_num > list_session.size() ) {
+					cout << "The number is not valid. Here are last session's conversations." << endl;
+					session_num = (int)list_session.size();
 				}
-				else
-				{
-					cout << "Session " << session_num << ":" << endl;
-					for (int i = 0; i < list_session[session_num - 1].size(); ++i) {
-						cout << "Question: " << list_session[session_num - 1][i].question << endl;
-						cout << "Answer: " << list_session[session_num - 1][i].answer << endl;
-					}
+
+				cout << "Session " << session_num << ":" << endl;
+				for (int i = 0; i < list_session[session_num - 1].size(); ++i) {
+					cout << "Question: " << list_session[session_num - 1][i].question << endl;
+					cout << "Answer: " << list_session[session_num - 1][i].answer << endl;
 				}
+				
 			}
 			continue;
 		}
 
 		if (prompt == "%all") {
+			// Restore the session
+			if (hist_conver.size() > 0) {
+				LISTCONVERSATIONS item_conv(hist_conver);
+				list_session.insert(list_session.end(), item_conv);
+				hist_conver.clear();
+			}
+
+			int session_cnt = 0;
 			for (int i = 0; i < list_session.size(); ++i) {
-				for (int j = 0; j < list_session[i].size(); ++j)
-					cout << list_session[i][j].question << " " << list_session[i][j].answer << endl;
-				cout << "=======================================================" << endl;
+				cout << "Session " << ++session_cnt << endl;
+				for (int j = 0; j < list_session[i].size(); ++j){
+					cout << "Question: " << list_session[i][j].question << endl;
+					cout << "Answer: " << list_session[i][j].answer << endl;
+				}
+				cout << "------------------------------------------" << endl;
 			}
 			continue;
 		}
 
 		if (prompt == "%") {
 			// Restore the session
-			LISTCONVERSATIONS item_conv(hist_conver);
-			list_session.insert(list_session.end(), item_conv);
+			if (hist_conver.size() > 0) {
+				LISTCONVERSATIONS item_conv(hist_conver);
+				list_session.insert(list_session.end(), item_conv);
+				hist_conver.clear();
+			}
 
-			hist_conver.clear();			
 			continue;
 		}
 			
 		if (prompt.empty()) {
-			if (hist_conver.size() > 0) {
-				LISTCONVERSATIONS item_conv(hist_conver);
-
-				list_session.insert(list_session.end(), item_conv);
-			}
-			
 			break;
 		}
 		
